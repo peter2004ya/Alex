@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PositionFood</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_signup">SignUp</string>
+    <string name="title_activity_main">PositionFood</string>
+    <string name="title_activity_postion_serch">postion_serch</string>
+    <string name="title_activity_la_carte_menu">la carte_menu</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_activity_stores">StoresActivity</string>
+
+</resources>
