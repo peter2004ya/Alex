@@ -27,13 +27,13 @@ public class La_carte_menu extends Activity {
 		String[] Cname = new String[]{"¤¤¦¡","¤é¦¡","Áú¦¡","®õ¦¡®Æ²z","¬ü¦¡","¦L«×®Æ²z","¯À­¹"};
 		String[] Ename = new String[]{"Chinese","Japan","Koren","Thailand","America","India","Vegetarian food"};
 		String[][] nname = new String[][] {
-			{"(A1)³»¨O®p","(A2)¨{¤p©¨","(A3)Åå¬P"},
-			{"(C1)Ávµ¬©ÔÄÑ","(C2)¤pªY©~°s«Î","(C3)²`©]­¹°ó","(C4)ª°µ£"},
-			{"(D1)Honey Dog","(D2)¤p±i¬µÂû","(D3)Áú¶P´@"},
-			{"(F1)¥Ë­¼","(F2)®õÃø¹L"},
-			{"(G1)°Ñ¼Ó","(G2)Saturday"},
-			{"(E1)·¢¶}¥Ï»æ","(E2)¦L«×¬Ó®c"},
-			{"(B1)«x¶ê","(B2)¿éã_"}
+			{"³»¨O®p","¨{¤p©¨","Åå¬P"},
+			{"Ávµ¬©ÔÄÑ","¤pªY©~°s«Î","²`©]­¹°ó","ª°µ£"},
+			{"Honey Dog","¤p±i¬µÂû","Áú¶P´@"},
+			{"¥Ë­¼","®õÃø¹L"},
+			{"°Ñ¼Ó","Saturday"},
+			{"·¢¶}¥Ï»æ","¦L«×¬Ó®c"},
+			{"«x¶ê","¿éã_"}
 		};
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +63,11 @@ public class La_carte_menu extends Activity {
 		public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 			Log.d("Clivk", "groupPosition " + groupPosition + ", childPosition " + childPosition);
 			Intent intent = new Intent();
-			String resturantName = (nname[groupPosition][childPosition]);
+			String resturantName = nname[groupPosition][childPosition];
 			intent.putExtra("resName", resturantName);
 			intent.setClass(La_carte_menu.this, MenuActivity.class);
 			startActivity(intent);
 			La_carte_menu.this.finish();
-			
 			return true;
 		}
 		

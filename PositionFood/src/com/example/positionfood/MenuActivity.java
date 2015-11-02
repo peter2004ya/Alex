@@ -17,12 +17,12 @@ public class MenuActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu);
 		
-		Button ReturnButton  = (Button) findViewById(R.id.button1);
 		TextView text1 = (TextView) findViewById(R.id.textView1);
+		Button ReturnButton  = (Button) findViewById(R.id.button1);
 		ReturnButton.setOnClickListener(ReturnListener);
 		
-		String resName = getIntent().getStringExtra("resName");
-		text1.setText(resName);
+		String Name = getIntent().getStringExtra("resName"); 
+		text1.setText(Name);
 	}
 
 	private OnClickListener ReturnListener = new OnClickListener() {

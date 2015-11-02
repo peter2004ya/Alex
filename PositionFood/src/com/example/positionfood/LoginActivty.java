@@ -85,7 +85,7 @@ public class LoginActivty extends Activity {
 	};
 	
 	protected Listener<String> LoginSuccessListener = new Listener<String>() {
-		private String DataPassword,Name;
+		private String DataPassword,sName;
 		
 		@Override
 		public void onResponse(String response) {
@@ -94,8 +94,8 @@ public class LoginActivty extends Activity {
 				
 				for (int i = 0; i < array.length(); i++) {
 					JSONObject obj = array.getJSONObject(i);
-					DataPassword = obj.getString("Password");
-					Name = obj.getString("NM");
+					DataPassword = obj.getString("Password");	
+					sName = obj.getString("NM");
 				}	
 			}catch (JSONException e1) {
 				e1.printStackTrace();
@@ -107,9 +107,9 @@ public class LoginActivty extends Activity {
 			
 			if(DataPassword.equals(strPassword)){
 				Intent intent = new Intent();
-				String resturantName = ("Name");
-				intent.putExtra("resName", resturantName);
-				intent = new Intent(LoginActivty.this, MainActivity.class);				 
+				String iuName = sName;
+				intent = new Intent(LoginActivty.this, MainActivity.class);
+				intent.putExtra("resName", iuName);
 				startActivity(intent);
 				LoginActivty.this.finish();        
 			}else{
@@ -148,7 +148,7 @@ public class LoginActivty extends Activity {
 	};
 	
 	protected Listener<String> LoginSuccessListener1 = new Listener<String>() {
-		private String DataPassword,Name;
+		private String DataPassword,sName;
 		
 		@Override
 		public void onResponse(String response) {
@@ -158,23 +158,23 @@ public class LoginActivty extends Activity {
 				for (int i = 0; i < array.length(); i++) {
 					JSONObject obj = array.getJSONObject(i);
 					DataPassword = obj.getString("Password");	
-					Name = obj.getString("Name");
+					sName = obj.getString("Name");
 				}	
 			}catch (JSONException e1) {
 				e1.printStackTrace();
 			}finally {
 				mProgressDialog.dismiss();
 			}
-	
+			
 			String strPassword = (sPasswordInput.getEditableText().toString());
 			
 			if(DataPassword.equals(strPassword)){
 				Intent intent = new Intent();
-				String resturantName = ("Name");
-				intent.putExtra("resName", resturantName);
-				intent = new Intent(LoginActivty.this, StoresActivity.class);				 
+				String isName = sName;
+				intent = new Intent(LoginActivty.this, StoresActivity.class);
+				intent.putExtra("resName", isName);
 				startActivity(intent);
-				LoginActivty.this.finish();
+				LoginActivty.this.finish();        
 			}else{
 				Toast toast = Toast.makeText(LoginActivty.this,"±K½X¿ù»~¡I",Toast.LENGTH_SHORT);
 				toast.show();

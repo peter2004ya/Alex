@@ -20,12 +20,13 @@ public class StoresActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_stores);
 		
+		text1 = (TextView) findViewById(R.id.textView1);
 		logout  = (Button) findViewById(R.id.button1);
 		
 		logout.setOnClickListener(mlogoutListener);
 		
-		String resName = getIntent().getStringExtra("resName");
-		text1.setText(resName);
+		String Name = getIntent().getStringExtra("resName");
+		text1.setText(Name);
 	}
 
 	//©±®aµn¥X

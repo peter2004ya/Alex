@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		text5 =  (TextView) findViewById(R.id.textView5);
+		text5 = (TextView) findViewById(R.id.textView5);
 		imageButton01 = (ImageButton) findViewById(R.id.imageButton1);
 		imageButton02 = (ImageButton) findViewById(R.id.imageButton2);
 		button = (Button) findViewById(R.id.button1);
@@ -31,9 +31,9 @@ public class MainActivity extends Activity {
 		imageButton02.setOnClickListener(mimageButton02);
 		button.setOnClickListener(mbutton);
 		
-		String resName = getIntent().getStringExtra("resName");
-		text5.setText(resName);
-	}
+		String Name = getIntent().getStringExtra("resName");
+		text5.setText(Name); 
+		}
 	
 	//©w¦ì
 	private OnClickListener mimageButton01 = new OnClickListener() {

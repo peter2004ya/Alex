@@ -8,6 +8,16 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.positionfood.MainActivity" >
 
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageButton1"
+        android:layout_alignRight="@+id/imageButton1"
+        android:layout_below="@+id/imageButton1"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/ic_food" />
+
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
@@ -17,46 +27,23 @@
         android:text="登出" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/imageButton1"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/imageButton1"
-        android:src="@drawable/ic_food" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/imageButton2"
-        android:layout_alignLeft="@+id/textView2"
-        android:text="美食訂餐"
-        android:textSize="20sp" />
-
-    <ImageButton
         android:id="@+id/imageButton1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textView3"
-        android:layout_alignParentRight="true"
+        android:layout_alignRight="@+id/button1"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="22dp"
         android:src="@drawable/ic_map" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button1"
+        android:layout_below="@+id/textView4"
         android:layout_centerHorizontal="true"
-        android:text="Bienvenue"
-        android:textSize="50sp" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/button1"
-        android:text="使用者：" />
+        android:layout_marginTop="44dp"
+        android:text="美食導航"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/textView5"
@@ -68,12 +55,30 @@
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/imageButton1"
-        android:layout_centerHorizontal="true"
-        android:text="美食導航"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/imageButton1"
+        android:layout_marginTop="40dp"
+        android:text="美食訂餐"
         android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageButton1"
+        android:layout_alignTop="@+id/button1"
+        android:text="使用者：" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button1"
+        android:layout_toLeftOf="@+id/button1"
+        android:text="Bienvenue"
+        android:textSize="30sp" />
 
 </RelativeLayout>
