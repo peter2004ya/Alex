@@ -43,36 +43,36 @@ public class MenuActivity extends Activity {
 		String Name = getIntent().getStringExtra("resName"); 
 		text1.setText(Name);
 		
-		try {
-			String strAccount = URLEncoder.encode(text1.getEditableText().toString(), "UTF-8");
-			String url = "http://i2015server.herokuapp.com/store/menu?name=" + strAccount;				
-			StringRequest request = new StringRequest(Request.Method.GET, url, menuCompleteListener, menuErrorListener);
-			NetworkManager.getInstance(MenuActivity.this).request(null, request);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			String strAccount = URLEncoder.encode(text1.getEditableText().toString(), "UTF-8");
+//			String url = "http://i2015server.herokuapp.com/store/menu?name=" + strAccount;				
+//			StringRequest request = new StringRequest(Request.Method.GET, url, menuCompleteListener, menuErrorListener);
+//			NetworkManager.getInstance(MenuActivity.this).request(null, request);
+//		} catch (UnsupportedEncodingException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
-	private Listener<String> menuCompleteListener = new Listener<String>() {
-
-		@Override
-		public void onResponse(String response) {
-			try {
-				
-			}
-			catch (JSONException e) {
-				e.printStackTrace();
-			}
-		}
-	};
-	
-	private ErrorListener menuErrorListener = new ErrorListener() {
-
-		@Override
-		public void onErrorResponse(VolleyError error) {
-			
-		}
-	};
+//	private Listener<String> menuCompleteListener = new Listener<String>() {
+//
+//		@Override
+//		public void onResponse(String response) {
+//			try {
+//				
+//			}
+//			catch (JSONException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//	};
+//	
+//	private ErrorListener menuErrorListener = new ErrorListener() {
+//
+//		@Override
+//		public void onErrorResponse(VolleyError error) {
+//			
+//		}
+//	};
 	
 	//ªð¦^
 	private OnClickListener ReturnListener = new OnClickListener() {
