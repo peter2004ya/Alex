@@ -31,36 +31,36 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/button1"
         android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/button1"
         android:text="確定" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button2"
-        android:layout_alignBottom="@+id/button2"
-        android:layout_toRightOf="@+id/textView1"
-        android:text="元"
-        android:textSize="20sp" />
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_alignLeft="@+id/textView1"
+        android:text="TextView"
+        android:textSize="20dp" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView4"
         android:layout_alignBottom="@+id/textView4"
-        android:layout_alignRight="@+id/textView1"
-        android:text="TextView"
-        android:textSize="20sp" />
+        android:layout_toRightOf="@+id/textView4"
+        android:text="元"
+        android:textSize="20dp" />
 
     <ListView
         android:id="@+id/listView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/button1" >
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="17dp"
+        android:layout_toLeftOf="@+id/button1" >
 
     </ListView>
 
@@ -68,9 +68,19 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button2"
-        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/textView3"
+        android:layout_alignLeft="@+id/listView1"
+        android:layout_marginBottom="79dp"
         android:text="TextView"
-        android:textSize="20sp" />
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button2"
+        android:layout_toLeftOf="@+id/textView4"
+        android:text="總共："
+        android:textSize="20dp" />
 
 </RelativeLayout>

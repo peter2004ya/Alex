@@ -76,7 +76,7 @@ public class LoginActivty extends Activity {
 				String strAccount = URLEncoder.encode(UserInput.getEditableText().toString(), "UTF-8");
 				mProgressDialog.show();
 				String url = "http://i2015server.herokuapp.com/user/login?User=" + strAccount;				
-				StringRequest request = new StringRequest(Request.Method.GET, url, LoginSuccessListener, LoginErrorListener);
+				StringRequest request = new StringRequest(Request.Method.GET, url, userCompleteListener, userErrorListener);
 				NetworkManager.getInstance(LoginActivty.this).request(null, request);
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
@@ -84,7 +84,7 @@ public class LoginActivty extends Activity {
 		}
 	};
 	
-	protected Listener<String> LoginSuccessListener = new Listener<String>() {
+	protected Listener<String> userCompleteListener = new Listener<String>() {
 		private String DataPassword,sName;
 		
 		@Override
@@ -119,7 +119,7 @@ public class LoginActivty extends Activity {
 			}
 		}
 	};
-	protected ErrorListener LoginErrorListener = new ErrorListener() {
+	protected ErrorListener userErrorListener = new ErrorListener() {
 
 		@Override
 		public void onErrorResponse(VolleyError err) {
@@ -137,8 +137,8 @@ public class LoginActivty extends Activity {
 	
 				mProgressDialog.show();
 				
-				String url = "http://i2015server.herokuapp.com/stores/login?Store=" + strAccount;				
-				StringRequest request = new StringRequest(Request.Method.GET, url, LoginSuccessListener1, LoginErrorListener1);
+				String url = "http://i2015server.herokuapp.com/store/login?Store=" + strAccount;				
+				StringRequest request = new StringRequest(Request.Method.GET, url, storeCompleteListener, storeErrorListener);
 				NetworkManager.getInstance(LoginActivty.this).request(null, request);
 				
 			} catch (UnsupportedEncodingException e) {
@@ -147,7 +147,7 @@ public class LoginActivty extends Activity {
 		}
 	};
 	
-	protected Listener<String> LoginSuccessListener1 = new Listener<String>() {
+	protected Listener<String> storeCompleteListener = new Listener<String>() {
 		private String DataPassword,sName;
 		
 		@Override
@@ -183,7 +183,7 @@ public class LoginActivty extends Activity {
 		}
 	};
 	
-	protected ErrorListener LoginErrorListener1 = new ErrorListener() {
+	protected ErrorListener storeErrorListener = new ErrorListener() {
 
 		@Override
 		public void onErrorResponse(VolleyError err) {
@@ -208,20 +208,15 @@ public class LoginActivty extends Activity {
 				LoginActivty.this.finish(); 
 			}
 		};
-	
-	
+	//
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.login_activty, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			return true;
