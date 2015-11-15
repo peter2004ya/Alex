@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 public class SignupActivity extends Activity {
 	
-	private EditText mEmail, mUser, mPassword, mMP, mNM;
+	private EditText  mNM, mUser, mPassword;
 	private ProgressDialog mProgressDialog;
 
 	@Override
@@ -39,13 +39,11 @@ public class SignupActivity extends Activity {
 		returnButton.setOnClickListener(mreturnListener);
 		
 		mNM = (EditText) findViewById(R.id.editText1);
-		mMP = (EditText) findViewById(R.id.editText2);
-		mEmail = (EditText) findViewById(R.id.editText3);
 		mUser = (EditText) findViewById(R.id.editText4);
 		mPassword = (EditText) findViewById(R.id.editText5);
 		
 		mProgressDialog = new ProgressDialog(this);
-		mProgressDialog.setMessage("Wait...");
+		mProgressDialog.setMessage("請稍後...");
 	}
 	
 	private OnClickListener msignupListener = new OnClickListener() {
@@ -55,13 +53,11 @@ public class SignupActivity extends Activity {
 			
 			try {
 				String strNM = URLEncoder.encode(mNM.getEditableText().toString(), "UTF-8");
-				String strMP = URLEncoder.encode(mMP.getEditableText().toString(), "UTF-8");
-				String strEmail = URLEncoder.encode(mEmail.getEditableText().toString(), "UTF-8");
 				String strUser = URLEncoder.encode(mUser.getEditableText().toString(), "UTF-8");
 				String strPassword = URLEncoder.encode(mPassword.getEditableText().toString(), "UTF-8");
 				mProgressDialog.show();
 				
-				String url = "http://i2015server.herokuapp.com/user/signup?NM=" + strNM + "&MP=" + strMP + "&Email=" + strEmail + "&User=" + strUser + "&Password=" + strPassword;
+				String url = "http://i2015server.herokuapp.com/user/signup?NM=" + strNM + "&User=" + strUser + "&Password=" + strPassword;
 				StringRequest request = new StringRequest(Request.Method.GET, url, mOnAddSuccessListener, mOnErrorListener);
 				NetworkManager.getInstance(SignupActivity.this).request(null, request);
 			} catch (UnsupportedEncodingException e) {
@@ -77,8 +73,6 @@ public class SignupActivity extends Activity {
 		public void onResponse(String response) {
 			mProgressDialog.dismiss();
 			mNM.setText("");
-			mMP.setText("");
-			mEmail.setText("");
 			mUser.setText("");
 			mPassword.setText("");
 			Toast.makeText(SignupActivity.this, "註冊成功", Toast.LENGTH_LONG).show();

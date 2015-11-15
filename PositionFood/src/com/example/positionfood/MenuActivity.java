@@ -25,11 +25,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class MenuActivity extends Activity {
-
-	private static final ErrorListener ErrorListener = null;
+	
+	private ListView mListView;
+	private ArrayList<Photo> mDatas;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,41 +40,72 @@ public class MenuActivity extends Activity {
 		
 		TextView text1 = (TextView) findViewById(R.id.textView1);
 		Button ReturnButton  = (Button) findViewById(R.id.button1);
+		mListView = (ListView) findViewById(R.id.listView1);
 		ReturnButton.setOnClickListener(ReturnListener);
 		
 		String Name = getIntent().getStringExtra("resName"); 
 		text1.setText(Name);
 		
-//		try {
-//			String strAccount = URLEncoder.encode(text1.getEditableText().toString(), "UTF-8");
-//			String url = "http://i2015server.herokuapp.com/store/menu?name=" + strAccount;				
-//			StringRequest request = new StringRequest(Request.Method.GET, url, menuCompleteListener, menuErrorListener);
-//			NetworkManager.getInstance(MenuActivity.this).request(null, request);
-//		} catch (UnsupportedEncodingException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			String strAccount = URLEncoder.encode(text1.getEditableText().toString(), "UTF-8");
+			String url = "http://i2015server.herokuapp.com/store/menu?name=" + strAccount;				
+			StringRequest request = new StringRequest(Request.Method.GET, url, menuCompleteListener, menuErrorListener);
+			NetworkManager.getInstance(MenuActivity.this).request(null, request);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 	}
 	
-//	private Listener<String> menuCompleteListener = new Listener<String>() {
-//
-//		@Override
-//		public void onResponse(String response) {
-//			try {
-//				
-//			}
-//			catch (JSONException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//	};
-//	
-//	private ErrorListener menuErrorListener = new ErrorListener() {
-//
-//		@Override
-//		public void onErrorResponse(VolleyError error) {
-//			
-//		}
-//	};
+	private Listener<String> menuCompleteListener = new Listener<String>() {
+
+		@Override
+		public void onResponse(String response) {
+			try {
+				JSONArray json = new JSONArray(response);
+				mDatas = new ArrayList<Photo>();
+				JSONObject obj = json.getJSONObject(0);
+				JSONArray array = obj.getJSONArray("menu");
+				
+				for (int i = 0; i < array.length(); i++) {
+					JSONObject jsonPhoto = array.getJSONObject(i);
+					
+					Photo photo = new Photo();
+					
+					photo.id = jsonPhoto.getString("id");
+					photo.name = jsonPhoto.getString("name");
+					photo.price = jsonPhoto.getString("price");
+					mDatas.add(photo);
+				}
+				
+				ArrayAdapter<Photo> adapter = new ArrayAdapter<Photo>(MenuActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, mDatas);
+				mListView.setAdapter(adapter);
+				
+			}
+			catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+	};
+	
+	private ErrorListener menuErrorListener = new ErrorListener() {
+
+		@Override
+		public void onErrorResponse(VolleyError error) {
+			
+		}
+	};
+	
+	public class Photo {
+		public String id;
+		public String name;
+		public String price;
+		
+		@Override
+		public String toString() {
+			return name;
+		}
+		
+	}
 	
 	//ªð¦^
 	private OnClickListener ReturnListener = new OnClickListener() {

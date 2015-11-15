@@ -1,19 +1,68 @@
 package com.example.positionfood;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.toolbox.StringRequest;
+import com.example.networkcommunication.volleymgr.NetworkManager;
+
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class StoresActivity extends Activity {
 
 	private Button logout;
 	private TextView text1;
+	private int StoreID;
+	private ListView mListView;
+	private ArrayList<Photo> mDatas;
+	
+	private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			final Photo photo = mDatas.get(position);
+			final CharSequence[] items = { photo.menu, photo.total + "元"};
+			
+			AlertDialog.Builder b = new AlertDialog.Builder(StoresActivity.this);
+			b.setTitle(photo.client + "的訂單");
+			b.setItems(items, null);
+			b.setPositiveButton("確認完畢", new DialogInterface.OnClickListener() {
+				
+				//刪除訂單
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+				}
+			});
+			b.setNegativeButton("取消", null);
+			b.show();
+			
+		}
+	};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,13 +71,104 @@ public class StoresActivity extends Activity {
 		
 		text1 = (TextView) findViewById(R.id.textView1);
 		logout  = (Button) findViewById(R.id.button1);
+		mListView = (ListView) findViewById(R.id.listView1);
+		mListView.setOnItemClickListener(mOnItemClickListener );
 		
 		logout.setOnClickListener(mlogoutListener);
 		
 		String Name = getIntent().getStringExtra("resName");
 		text1.setText(Name);
+		
+		//抓取店家ID
+		try {
+			String strAccount = URLEncoder.encode(text1.getEditableText().toString(), "UTF-8");
+			String url = "http://i2015server.herokuapp.com/store/id?name=" + strAccount;				
+			StringRequest request = new StringRequest(Request.Method.GET, url, pullidCompleteListener, pullidErrorListener);
+			NetworkManager.getInstance(StoresActivity.this).request(null, request);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			}
+		//透過店家ID取訂單
+		String url = "http://i2015server.herokuapp.com/order?rid=" + StoreID;				
+		StringRequest request = new StringRequest(Request.Method.GET, url, pushpullCompleteListener, pushpullErrorListener);
+		NetworkManager.getInstance(StoresActivity.this).request(null, request);
+		
 	}
+	//Pull ID
+	protected Listener<String> pullidCompleteListener = new Listener<String>() {
+		
+		@Override
+		public void onResponse(String response) {
+			try {
+				JSONArray array = new JSONArray(response);
+				
+				for (int i = 0; i < array.length(); i++) {
+					JSONObject obj = array.getJSONObject(i);
+					StoreID = obj.getInt("rid");	
+				}	
+			}catch (JSONException e1) {
+				e1.printStackTrace();
+			}
+		}
+	};
+	protected ErrorListener pullidErrorListener = new ErrorListener() {
 
+		@Override
+		public void onErrorResponse(VolleyError err) {
+		}
+	};
+	
+	//PushPull ID
+	protected Listener<String> pushpullCompleteListener = new Listener<String>() {
+		
+		@Override
+		public void onResponse(String response) {
+			try {
+				
+				mDatas = new ArrayList<Photo>();
+				
+				JSONArray array = new JSONArray(response);
+				
+				for (int i = 0; i < array.length(); i++) {
+					JSONObject obj = array.getJSONObject(i);
+					
+					Photo photo = new Photo();
+					
+					photo.rid = obj.getString("rid");
+					photo.client = obj.getString("client_id");
+					photo.menu = obj.getString("menu_id");
+					photo.total = obj.getString("total");
+					mDatas.add(photo);
+				}
+				
+				ArrayAdapter<Photo> adapter = new ArrayAdapter<Photo>(StoresActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, mDatas);
+				mListView.setAdapter(adapter);
+				
+			}catch (JSONException e1) {
+				e1.printStackTrace();
+			}
+		}
+	};
+	public class Photo {
+		public String rid;
+		public String client;
+		public String menu;
+		public String total;
+		
+		@Override
+		public String toString() {
+			return rid;
+		}
+		
+	}
+	
+	protected ErrorListener pushpullErrorListener = new ErrorListener() {
+	
+		@Override
+		public void onErrorResponse(VolleyError err) {
+		}
+	};
+	
 	//店家登出
 	private OnClickListener mlogoutListener = new OnClickListener() {
 		

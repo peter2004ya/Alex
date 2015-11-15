@@ -14,9 +14,10 @@
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignRight="@+id/button1"
         android:layout_below="@+id/textView1"
         android:layout_marginTop="32dp"
+        android:layout_toRightOf="@+id/textView2"
         android:ems="10"
         android:inputType="textPersonName" >
 
@@ -24,29 +25,12 @@
     </EditText>
 
     <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText1"
-        android:layout_below="@+id/editText1"
-        android:ems="10"
-        android:inputType="phone" />
-
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText2"
-        android:layout_below="@+id/editText2"
-        android:ems="10"
-        android:inputType="textEmailAddress" />
-
-    <EditText
         android:id="@+id/editText4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText3"
-        android:layout_below="@+id/editText3"
+        android:layout_alignLeft="@+id/editText1"
+        android:layout_alignRight="@+id/editText1"
+        android:layout_below="@+id/editText1"
         android:ems="10" />
 
     <EditText
@@ -54,6 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editText4"
+        android:layout_alignRight="@+id/editText4"
         android:layout_below="@+id/editText4"
         android:ems="10"
         android:inputType="textPassword" />
@@ -77,40 +62,14 @@
         android:text="返回" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/editText1"
-        android:layout_alignBottom="@+id/editText1"
-        android:layout_alignLeft="@+id/button1"
-        android:text="姓名" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/editText2"
-        android:layout_alignBottom="@+id/editText2"
-        android:layout_alignLeft="@+id/textView2"
-        android:text="手機號碼" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/editText3"
-        android:layout_alignBottom="@+id/editText3"
-        android:layout_alignLeft="@+id/textView3"
-        android:text="電子郵件" />
-
-    <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/editText4"
         android:layout_alignBottom="@+id/editText4"
-        android:layout_alignLeft="@+id/textView4"
-        android:text="帳號" />
+        android:layout_alignLeft="@+id/textView2"
+        android:text="帳號"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/textView6"
@@ -119,7 +78,8 @@
         android:layout_alignBaseline="@+id/editText5"
         android:layout_alignBottom="@+id/editText5"
         android:layout_alignLeft="@+id/textView5"
-        android:text="密碼" />
+        android:text="密碼"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/textView1"
@@ -130,5 +90,15 @@
         android:layout_marginTop="16dp"
         android:text="會員註冊"
         android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editText1"
+        android:layout_alignBottom="@+id/editText1"
+        android:layout_alignLeft="@+id/button1"
+        android:text="姓名"
+        android:textSize="20sp" />
 
 </RelativeLayout>
