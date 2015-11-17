@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.positionfood.Postion_serch" >
+    tools:context="com.example.positionfood.Postion_serchActivity" >
 
     <item
         android:id="@+id/action_settings"

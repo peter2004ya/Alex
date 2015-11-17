@@ -91,7 +91,7 @@ public class La_carte_menu extends Activity {
 		@Override
 		public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView,
 				ViewGroup parent) {
-			convertView = myInflater.inflate(R.layout.mylistvieww,null);
+			convertView = myInflater.inflate(R.layout.listview_b_child,null);
 			TextView txtName = ((TextView)convertView.findViewById(R.id.textView1));
 			txtName.setText(nname[groupPosition][childPosition]);
 			txtName.setOnClickListener(textClick);
@@ -109,18 +109,6 @@ public class La_carte_menu extends Activity {
 					int groupPosition = Integer.parseInt(strPositions[0]);
 					int childPosition = Integer.parseInt(strPositions[1]);
 					Log.d("Click", "groupPosition " + groupPosition + ", childPosition " + childPosition);
-					// TODO
-//					String resturantName = "";
-//					Intent intent = new Intent(La_carte_menu.this, MenuActivity.class);
-//					intent.putExtra("resName", resturantName);
-//					startActivity(intent);
-					
-					// MenuActivity code snippent
-					/*onCreate() {
-						String resName = getIntent().getStringExtra("resName");
-						// composite api
-						// http://XXXXX/api/getMenu?res=resName
-					}*/
 				}
 			}
 		};
@@ -148,7 +136,7 @@ public class La_carte_menu extends Activity {
 		@Override
 		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 
-			convertView = myInflater.inflate(R.layout.mylistview,null);
+			convertView = myInflater.inflate(R.layout.listview_a_group,null);
 			
 			//取得圖片
 			ImageView imgLogo = (ImageView)convertView.findViewById(R.id.imageView1);

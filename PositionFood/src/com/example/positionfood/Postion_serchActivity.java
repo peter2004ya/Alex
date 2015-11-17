@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class Postion_serch extends Activity {
+public class Postion_serchActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

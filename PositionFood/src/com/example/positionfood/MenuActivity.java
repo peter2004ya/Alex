@@ -13,7 +13,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.StringRequest;
-
 import com.example.networkcommunication.volleymgr.NetworkManager;
 
 import android.app.Activity;
@@ -32,7 +31,7 @@ public class MenuActivity extends Activity {
 	
 	private ListView mListView;
 	private ArrayList<Photo> mDatas;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,7 +46,7 @@ public class MenuActivity extends Activity {
 		text1.setText(Name);
 		
 		try {
-			String strAccount = URLEncoder.encode(text1.getEditableText().toString(), "UTF-8");
+			String strAccount = URLEncoder.encode(Name, "UTF-8");
 			String url = "http://i2015server.herokuapp.com/store/menu?name=" + strAccount;				
 			StringRequest request = new StringRequest(Request.Method.GET, url, menuCompleteListener, menuErrorListener);
 			NetworkManager.getInstance(MenuActivity.this).request(null, request);
@@ -61,13 +60,13 @@ public class MenuActivity extends Activity {
 		@Override
 		public void onResponse(String response) {
 			try {
-				JSONArray json = new JSONArray(response);
 				mDatas = new ArrayList<Photo>();
-				JSONObject obj = json.getJSONObject(0);
-				JSONArray array = obj.getJSONArray("menu");
+				JSONArray array0 = new JSONArray(response);
+				JSONObject obj = array0.getJSONObject(0);
+				JSONArray array1 = obj.getJSONArray("menu");
 				
-				for (int i = 0; i < array.length(); i++) {
-					JSONObject jsonPhoto = array.getJSONObject(i);
+				for (int i = 0; i < array1.length(); i++) {
+					JSONObject jsonPhoto = array1.getJSONObject(i);
 					
 					Photo photo = new Photo();
 					
@@ -77,7 +76,7 @@ public class MenuActivity extends Activity {
 					mDatas.add(photo);
 				}
 				
-				ArrayAdapter<Photo> adapter = new ArrayAdapter<Photo>(MenuActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, mDatas);
+				ListViewAdapter_Client adapter = new ListViewAdapter_Client(mDatas);
 				mListView.setAdapter(adapter);
 				
 			}
@@ -99,12 +98,9 @@ public class MenuActivity extends Activity {
 		public String id;
 		public String name;
 		public String price;
-		
-		@Override
-		public String toString() {
+		public String name() {
 			return name;
 		}
-		
 	}
 	
 	//ªð¦^

@@ -39,13 +39,13 @@ public class StoresActivity extends Activity {
 	private TextView text1;
 	private int StoreID;
 	private ListView mListView;
-	private ArrayList<Photo> mDatas;
+	private ArrayList<Photo2> mDatas;
 	
 	private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			final Photo photo = mDatas.get(position);
+			final Photo2 photo = mDatas.get(position);
 			final CharSequence[] items = { photo.menu, photo.total + "¤¸"};
 			
 			AlertDialog.Builder b = new AlertDialog.Builder(StoresActivity.this);
@@ -81,7 +81,7 @@ public class StoresActivity extends Activity {
 		
 		//§ì¨ú©±®aID
 		try {
-			String strAccount = URLEncoder.encode(text1.getEditableText().toString(), "UTF-8");
+			String strAccount = URLEncoder.encode(Name, "UTF-8");
 			String url = "http://i2015server.herokuapp.com/store/id?name=" + strAccount;				
 			StringRequest request = new StringRequest(Request.Method.GET, url, pullidCompleteListener, pullidErrorListener);
 			NetworkManager.getInstance(StoresActivity.this).request(null, request);
@@ -105,7 +105,7 @@ public class StoresActivity extends Activity {
 				for (int i = 0; i < array.length(); i++) {
 					JSONObject obj = array.getJSONObject(i);
 					StoreID = obj.getInt("rid");	
-				}	
+				}
 			}catch (JSONException e1) {
 				e1.printStackTrace();
 			}
@@ -125,14 +125,14 @@ public class StoresActivity extends Activity {
 		public void onResponse(String response) {
 			try {
 				
-				mDatas = new ArrayList<Photo>();
+				mDatas = new ArrayList<Photo2>();
 				
 				JSONArray array = new JSONArray(response);
 				
 				for (int i = 0; i < array.length(); i++) {
 					JSONObject obj = array.getJSONObject(i);
 					
-					Photo photo = new Photo();
+					Photo2 photo = new Photo2();
 					
 					photo.rid = obj.getString("rid");
 					photo.client = obj.getString("client_id");
@@ -141,7 +141,7 @@ public class StoresActivity extends Activity {
 					mDatas.add(photo);
 				}
 				
-				ArrayAdapter<Photo> adapter = new ArrayAdapter<Photo>(StoresActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, mDatas);
+				ListViewAdapter_Store adapter = new ListViewAdapter_Store(mDatas);
 				mListView.setAdapter(adapter);
 				
 			}catch (JSONException e1) {
@@ -149,7 +149,7 @@ public class StoresActivity extends Activity {
 			}
 		}
 	};
-	public class Photo {
+	public class Photo2 {
 		public String rid;
 		public String client;
 		public String menu;
@@ -157,7 +157,7 @@ public class StoresActivity extends Activity {
 		
 		@Override
 		public String toString() {
-			return rid;
+			return client;
 		}
 		
 	}

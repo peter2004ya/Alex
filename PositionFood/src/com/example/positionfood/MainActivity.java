@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
 		
 		public void onClick(View v) {
 			Intent intent = new Intent();
-			intent.setClass(MainActivity.this, Postion_serch.class);
+			intent.setClass(MainActivity.this, Postion_serchActivity.class);
 			startActivity(intent);
 			MainActivity.this.finish(); 
 		}
